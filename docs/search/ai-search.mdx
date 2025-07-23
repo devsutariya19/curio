@@ -1,0 +1,16 @@
+# Advanced AI Search
+
+This feature moves beyond traditional keyword matching to provide a more intelligent, semantic search experience.
+
+### Feature: AI-Powered Semantic Search
+Instead of just looking for keywords, the AI search understands the *meaning* and *intent* behind a user's query. This allows users to ask questions in natural language and receive highly relevant results, even if the exact words aren't in the documentation.
+
+- **How it Works**:
+    1.  **Vector Embeddings**: When a document is saved, its content is broken into chunks and converted into numerical representations (vector embeddings) using a machine learning model. These are stored in Supabase using the `pg_vector` extension.
+    2.  **Query Analysis**: When a user types a query, the search term is also converted into a vector embedding.
+    3.  **Similarity Search**: The system then performs a similarity search to find the document chunks whose embeddings are closest to the query's embedding, ensuring conceptual relevance.
+
+- **Benefits**:
+    -   Finds relevant content even with typos or different phrasing.
+    -   Users can ask questions like "How do I set up authentication?" instead of just searching for "auth".
+    -   Can be extended to provide direct, AI-generated answers synthesized from the most relevant documents.

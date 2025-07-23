@@ -1,102 +1,83 @@
-import Image from "next/image";
+import FakeCodeEditor from "@/components/code-editor";
+import Navbar from "@/components/navbar";
+import { Button } from "@/components/ui/button";
+import { Zap, ArrowRight, Book, Github, Rocket } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
+  const features = [
+    {
+      title: "Built for Speed and Simplicity",
+      description: "DocuFlow uses a folder-based system to turn your markdown files into beautifully rendered documentation pages automatically. No complex setup, just create files and see them live.",
+      icon: <Book className="h-8 w-8 mb-4 text-emerald-400" />,
+      visual: <FakeCodeEditor language="File Tree" content={`/docs\n  ├── introduction.mdx\n  ├── getting-started.mdx\n  └── /api\n      └── reference.mdx`} />,
+    },
+    {
+      title: "Interactive Docs with MDX",
+      description: "Go beyond static markdown. Embed custom React components directly into your content to create interactive charts, alerts, and dynamic examples that engage your readers.",
+      icon: <Zap className="h-8 w-8 mb-4 text-emerald-400" />,
+      visual: <FakeCodeEditor language="MDX" content={`import { Chart } from './components/Chart';\n\n# Monthly Active Users\n\nHere is a chart of our active users:\n\n<Chart data={...} />`} />,
+    },
+    {
+      title: "Content Lives in GitHub",
+      description: "Keep your documentation in sync by managing it directly within your GitHub repository. Every commit can be a documentation update, making it seamless for developers to contribute.",
+      icon: <Github className="h-8 w-8 mb-4 text-emerald-400" />,
+      visual: <FakeCodeEditor language="File Structure" content={`/your-repo\n  ├── /src\n  │   └── ...\n  └── /docs\n      └── new-feature.mdx`} />,
+    },
+    {
+      title: "Deploy Globally in Seconds",
+      description: "Connect your GitHub repository and deploy your documentation site globally via Vercel or Netlify. Every 'git push' automatically builds and updates your live site.",
+      icon: <Rocket className="h-8 w-8 mb-4 text-emerald-400" />,
+      visual: <FakeCodeEditor language="Terminal" content={`$ git push origin main\n\n> Vercel: Build initiated...\n> Vercel: Deployment successful!\n> URL: https://your-docs.vercel.app`} />,
+    },
+  ];
+  
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="bg-gray-900 text-gray-100 min-h-screen overflow-x-hidden">
+      <div className="absolute inset-0 z-0 h-full w-full bg-transparent bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>        
+      <Navbar className="fixed top-0 left-0 right-0"/>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <main className="pt-32 relative z-10">
+        <div className="container mx-auto sm:px-2 px-6">
+          <section className="text-center pt-16 pb-24">
+            <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
+              Create Documentation, Effortlessly.
+            </h2>
+            <p className="max-w-3xl mx-auto text-lg md:text-xl text-gray-400 mb-8">
+              A simple, fast, and functional documentation site that allows your team to view, edit, and manage markdown-based content with ease.
+            </p>
+            <div className="flex justify-center space-x-4">
+              <Link href="/docs">
+                <Button size="lg" className="bg-emerald-600 text-white hover:bg-emerald-700 rounded-lg px-8 py-6 text-lg shadow-lg shadow-emerald-500/20">
+                  Get a Demo
+                </Button>
+              </Link>
+            </div>
+          </section>
+
+          <section className="space-y-24 md:space-y-32">
+            {features.map((feature, index) => (
+              <div key={feature.title} className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div className={`md:pr-8 ${index % 2 !== 0 ? 'md:order-last' : ''}`}>
+                  <div className="flex flex-row gap-2 items-center">
+                    <span>{feature.icon}</span>
+                    <h3 className="text-2xl font-bold text-white mb-4">{feature.title}</h3>
+                  </div>
+                  <p className="text-gray-400 text-lg leading-relaxed">{feature.description}</p>
+                </div>
+                <div>
+                  {feature.visual}
+                </div>
+              </div>
+            ))}
+          </section>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="border-t border-gray-800 mt-32 relative z-10">
+        <div className="container mx-auto px-6 py-8 text-center text-gray-500">
+          <p>&copy; {new Date().getFullYear()} Curio Docs</p>
+        </div>
       </footer>
     </div>
   );
