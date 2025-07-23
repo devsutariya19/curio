@@ -5,10 +5,11 @@ import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import React from 'react'
 import ResponsiveBreadcrumbs from '@/components/responsive-breadcrumbs'
+import { DOCS_PATH } from '@/lib/constants'
 
 export default async function DocPage({ params }: { params: Promise<{ slug?: string[] }> }) {
   const { slug = [] } = await params
-  const filePath = path.join(process.cwd(), 'docs', ...slug)
+  const filePath = path.join(DOCS_PATH, ...slug)
 
   let source = ''
   try {

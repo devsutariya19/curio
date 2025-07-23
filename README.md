@@ -1,4 +1,4 @@
-# Project Docs 
+# Curio Docs 
 ![Work In Progress](https://img.shields.io/badge/Status-In%20Progress-yellow)
 
 A fast, modern, and collaborative documentation site powered by Next.js and Supabase.
