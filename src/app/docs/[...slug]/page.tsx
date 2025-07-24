@@ -3,7 +3,6 @@ import path from 'path'
 import matter from 'gray-matter'
 import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import React from 'react'
 import ResponsiveBreadcrumbs from '@/components/responsive-breadcrumbs'
 import { DOCS_PATH } from '@/lib/constants'
 

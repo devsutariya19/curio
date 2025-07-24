@@ -1,10 +1,15 @@
 import {ArrowRight } from 'lucide-react'
-import React from 'react'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
-export default function Navbar({className}: {className?: string}) {
+export default function Navbar({
+  className,
+  isAuthenticated = false
+}: {
+  className?: string
+  isAuthenticated?: boolean
+}) {
   return (
     <>
       <header className={cn(
@@ -18,15 +23,19 @@ export default function Navbar({className}: {className?: string}) {
             </h1>
           </Link>
           <nav className="flex items-center space-x-4">
-            {/* <Button variant="ghost" className="text-gray-300 hover:text-white hover:bg-gray-800">
-              Sign In
-            </Button> */}
-
-            <Link href="/docs">
-              <Button className="bg-emerald-600 text-white hover:bg-emerald-700 rounded-lg">
-                Docs <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+            {isAuthenticated ? (
+              <Link href="/docs">
+                <Button className="bg-emerald-600 text-white hover:bg-emerald-700 rounded-lg">
+                  Docs <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            ) :
+              <Link href="/login">
+                <Button variant="ghost" className="text-gray-300 hover:text-white hover:bg-gray-800">
+                  Sign In
+                </Button>
+              </Link>
+            }
           </nav>
         </div>
         <div className="h-[1px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>

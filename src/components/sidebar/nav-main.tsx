@@ -5,7 +5,7 @@ import {
   SidebarMenuItem,
   SidebarMenuSub,
 } from "@/components/ui/sidebar"
-import { ChevronRight, FileText} from "lucide-react"
+import { Bookmark, ChevronRight} from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { DocNode } from "@/models/types";
 import { formatTitle, flattenSlug } from "@/lib/utils";
@@ -16,7 +16,7 @@ export function SidebarFolder({ node }: { node: any }) {
       <SidebarMenuItem>
         <CollapsibleTrigger asChild>
           <SidebarMenuButton tooltip={node.name}>
-            <span>{formatTitle(node.name)}</span>
+            <span className="text-md font-bold">{formatTitle(node.name)}</span>
             <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
           </SidebarMenuButton>
         </CollapsibleTrigger>
@@ -47,7 +47,7 @@ export function renderSidebarTree(nodes: DocNode[]) {
           <SidebarMenuItem key={slugStr}>
             <SidebarMenuButton asChild tooltip={formatTitle(node.name)}>
               <a href={slugStr} className="flex items-center gap-2 w-full">
-                <FileText className="shrink-0" />
+                <Bookmark className="shrink-0" />
                 <span>{formatTitle(node.name)}</span>
               </a>
             </SidebarMenuButton>

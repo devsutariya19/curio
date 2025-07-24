@@ -1,8 +1,7 @@
 "use client"
 
-import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "../ui/sidebar"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
-import { Bot } from "lucide-react"
+import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar"
+import { DropdownMenu } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
 
 export function NavHeader() {

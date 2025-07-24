@@ -5,10 +5,8 @@ A fast, modern, and collaborative documentation site powered by Next.js and Supa
 
 This project provides a complete solution for building a documentation website with built-in content management, real-time collaboration, and powerful AI-driven search. It's designed to be easy for non-technical users to contribute while offering advanced features for developers.
 
-
-
 ## Project Status
-This project is currently under development. I am working on several features and updates, and the main functionality is about 60% complete. Please feel free to check the issues section for more details on what's being worked on.
+This project is currently under development. I am working on several features and updates, and the main functionality is about 50% complete.
 
 ### In Development
 - [ ] Full Supabase Integration: Connecting authentication, database storage for documents, and user roles to the frontend.
@@ -38,9 +36,9 @@ This project is currently under development. I am working on several features an
 
 ### Prerequisites
 
--   Node.js (v18.x or later)
+-   Node.js
 -   npm or yarn
--   A free Supabase account
+-   Supabase
 
 ### Installation
 
