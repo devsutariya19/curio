@@ -49,7 +49,7 @@ export default function Home() {
             <div className="flex justify-center space-x-4">
               <Link href="/docs">
                 <Button size="lg" className="bg-emerald-600 text-white hover:bg-emerald-700 rounded-lg px-8 py-6 text-lg shadow-lg shadow-emerald-500/20">
-                  Get a Demo
+                  Go to Docs
                 </Button>
               </Link>
             </div>

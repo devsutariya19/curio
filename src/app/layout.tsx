@@ -1,7 +1,12 @@
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import "@/app/globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import Head from "next/head";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cruio Docs",
+  description: "Curio Docs - your go-to platform for building modern documentation"
+};
 
 export default async function RootLayout({
   children,
@@ -10,10 +15,6 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
-        <meta charSet="utf-8"/>
-        <title>Cruio Docs</title>
-      </Head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}

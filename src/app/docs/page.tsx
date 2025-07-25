@@ -31,8 +31,7 @@ export default function Docs() {
       <div className='lg:hidden'>
         <ResponsiveBreadcrumbs slug={[]} />
       </div>
-      <div className="relative flex min-h-screen flex-col items-center bg-gray-900 text-white p-4 sm:p-8">
-        <div className="pointer-events-none absolute inset-0 z-0 h-full w-full bg-transparent bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div className="relative flex min-h-screen flex-col items-center p-4 sm:p-8">
         <div className="relative z-10 flex w-full max-w-4xl flex-col items-center text-center pt-8">
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
             Welcome to the <span className="text-emerald-400">Docs</span> 🩺
@@ -41,19 +40,19 @@ export default function Docs() {
             Find the guides, tutorials, and references you need to build with our platform. Start by searching or exploring one of the sections below.
           </p>
 
-          <div className="relative mt-8 w-full max-w-lg">
+          <div className="relative mt-8.5 w-full max-w-lg">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
             <Input 
               type="search" 
               placeholder="Search documentation..."
-              className="w-full rounded-lg bg-gray-800 border-gray-700 pl-10 pr-4 py-6 text-white placeholder:text-gray-500 focus:border-emerald-500 focus:ring-emerald-500"
+              className="w-full rounded-lg  border-gray-700 pl-10 pr-4 py-6 text-white placeholder:text-gray-500 focus:border-emerald-500 focus:ring-emerald-500"
             />
           </div>
 
           <div className="mt-10 grid w-full grid-cols-1 gap-8 md:max-w-lg lg:max-w-none lg:grid-cols-3">
             {mainSections.map((section) => (
               <Link href={section.href} key={section.title} className="group">
-                <Card className="h-full bg-gray-800/50 border-gray-700 rounded-xl shadow-lg hover:border-emerald-500/50 transition-all duration-300 transform hover:-translate-y-1">
+                <Card className="h-full bg-gray-800/60 border-gray-700 rounded-xl shadow-lg hover:border-emerald-500/50 transition-all duration-300 transform hover:-translate-y-1">
                   <CardHeader className="flex flex-col items-center text-center p-6">
                     <div className="mb-4">{section.icon}</div>
                     <CardTitle className="text-xl font-semibold text-white group-hover:text-emerald-400 transition-colors">

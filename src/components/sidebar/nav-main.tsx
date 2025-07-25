@@ -36,11 +36,6 @@ export function renderSidebarTree(nodes: DocNode[]) {
 
   return (
     <SidebarMenu>
-      {folders.map((node) => {
-        const slugStr = flattenSlug(node.slug)
-        return <SidebarFolder key={slugStr} node={node} />
-      })}
-
       {files.map((node) => {
         const slugStr = flattenSlug(node.slug)
         return (
@@ -53,6 +48,10 @@ export function renderSidebarTree(nodes: DocNode[]) {
             </SidebarMenuButton>
           </SidebarMenuItem>
         )
+      })}
+      {folders.map((node) => {
+        const slugStr = flattenSlug(node.slug)
+        return <SidebarFolder key={slugStr} node={node} />
       })}
     </SidebarMenu>
   )
