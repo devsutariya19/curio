@@ -19,7 +19,7 @@ export function MdxCard({ title, icon, href, children }: Props) {
   const Icon = icon ? iconMap[icon] : null;
 
   const CardInner = (
-    <Card className="transition-shadow hover:shadow-md">
+    <Card className="transition-shadow hover:shadow-md my-5">
       <CardHeader className="flex items-center gap-3">
         {Icon}
         <div>
