@@ -20,7 +20,7 @@ export default async function DocLayout({ children }: { children: ReactNode }) {
         <div className="bg-gray-900 overscroll-none">
           <main>
             <Navbar className='lg:hidden fixed top-0 w-full z-50' isAuthenticated={isAuthenticated}/>
-            <div className="px-8 lg:px-12 lg:my-5 my-25 z-10">
+            <div className="px-8 lg:px-12 lg:my-5 my-25 z-10 max-w-screen-2xl mx-auto">
               {children}
             </div>
           </main>

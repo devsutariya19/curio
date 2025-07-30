@@ -6,19 +6,24 @@ import { notFound } from 'next/navigation'
 import { bundleMDX } from "mdx-bundler";
 import {getMDXComponent} from 'mdx-bundler/client'
 
-
-import { DOCS_PATH, MDX_COMPONENTS } from '@/lib/constants'
-import { readDocFile } from '@/lib/server-utils'
+import { DOCS_FILE_PATH, DOCS_FOLDER } from '@/lib/constants'
+import { readDocFile, readStorageFile } from '@/lib/server-utils'
 
 import { Button } from '@/components/ui/button'
 import { ChevronDown } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { MDX_COMPONENTS } from '@/components/mdx/mdx-mappings';
 
 export default async function DocPage({ params }: { params: Promise<{ slug?: string[] }> }) {
   const { slug = [] } = await params
-  const filePath = path.join(DOCS_PATH, ...slug)
-
+  
+  // Local File System
+  const filePath = path.join(DOCS_FILE_PATH, ...slug)
   const source = await readDocFile(filePath);
+
+  // Supabase Storage
+  // const slugStr = slug.join('/');
+  // const source = await readStorageFile(slugStr);
 
   if (source === null) {
     return notFound()
@@ -34,7 +39,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug?: str
     <div className="mx-auto max-w-screen-sm sm:max-w-full mb-20">
       <div className='flex items-center justify-between mb-4'>
         <ResponsiveBreadcrumbs slug={slug} />
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <Button className="rounded-r-none">
             Copy Page
           </Button>
@@ -48,7 +53,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug?: str
               <DropdownMenuItem>View as Markdown</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
+        </div> */}
       </div>
       <div className="mb-10">
         {data.title && (

@@ -5,28 +5,22 @@ import {
   SidebarMenuItem,
   SidebarMenuSub,
 } from "@/components/ui/sidebar"
-import { Bookmark, ChevronRight} from "lucide-react"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Bookmark } from "lucide-react"
 import { DocNode } from "@/models/types";
 import { formatTitle, flattenSlug } from "@/lib/utils";
+import Link from "next/link";
+import { headers } from "next/headers";
 
 export function SidebarFolder({ node }: { node: any }) {
   return (
-    <Collapsible key={node.name} asChild defaultOpen={true} className="group/collapsible">
-      <SidebarMenuItem>
-        <CollapsibleTrigger asChild>
-          <SidebarMenuButton tooltip={node.name}>
-            <span className="text-md font-bold">{formatTitle(node.name)}</span>
-            <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-          </SidebarMenuButton>
-        </CollapsibleTrigger>
-        <CollapsibleContent>
-          <SidebarMenuSub>
-            {renderSidebarTree(node.children)}
-          </SidebarMenuSub>
-        </CollapsibleContent>
-      </SidebarMenuItem>
-    </Collapsible>
+    <SidebarMenuItem>
+      <SidebarMenuButton tooltip={node.name}>
+        <span className="text-md font-bold">{formatTitle(node.name)}</span>
+      </SidebarMenuButton>
+      <SidebarMenuSub>
+        {renderSidebarTree(node.children)}
+      </SidebarMenuSub>
+    </SidebarMenuItem>
   );
 }
 
@@ -41,10 +35,10 @@ export function renderSidebarTree(nodes: DocNode[]) {
         return (
           <SidebarMenuItem key={slugStr}>
             <SidebarMenuButton asChild tooltip={formatTitle(node.name)}>
-              <a href={slugStr} className="flex items-center gap-2 w-full">
+              <Link href={slugStr} className="flex items-center gap-2 w-full">
                 <Bookmark className="shrink-0" />
                 <span>{formatTitle(node.name)}</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         )
@@ -57,8 +51,7 @@ export function renderSidebarTree(nodes: DocNode[]) {
   )
 }
 
-
-export function NavMain({docsTree}: {docsTree: any[]}) {
+export async function NavMain({docsTree}: {docsTree: any[]}) {
   return (
     <SidebarGroup>
       {renderSidebarTree(docsTree)}

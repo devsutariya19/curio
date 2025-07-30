@@ -1,10 +1,19 @@
 import FakeCodeEditor from "@/components/code-editor";
 import Navbar from "@/components/navbar";
 import { Button } from "@/components/ui/button";
+import { createClient } from "@/utils/supabase/server";
 import { Zap, ArrowRight, Book, Github, Rocket } from "lucide-react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+  const {data, error} = await supabase.auth.getUser();
+  const isAuthenticated = data.user !== null;
+  if (error || !isAuthenticated) {
+    redirect('/login');
+  }
+
   const features = [
     {
       title: "Built for Speed and Simplicity",
@@ -35,7 +44,7 @@ export default function Home() {
   return (
     <div className="bg-gray-900 text-gray-100 min-h-screen overflow-x-hidden">
       <div className="absolute inset-0 z-0 h-full w-full bg-transparent bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>        
-      <Navbar className="fixed top-0 left-0 right-0"/>
+      <Navbar className="fixed top-0 left-0 right-0" isAuthenticated={isAuthenticated}/>
 
       <main className="pt-32 relative z-10">
         <div className="container mx-auto sm:px-2 px-6">

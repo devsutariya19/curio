@@ -1,15 +1,20 @@
 import { DocNode } from '@/models/types';
-import fg from 'fast-glob';
-import { DOCS_PATH, FILE_TYPES } from '@/lib/constants';
+import { FILE_TYPES } from '@/lib/constants';
+import { listLocalFiles, listStorageFiles } from '@/lib/server-utils';
+
+import { getCachedStorageFiles } from '@/lib/file-cache';
 
 type DocNodeInternal = Omit<DocNode, 'children'> & { children?: Record<string, DocNodeInternal> };
 
 export async function getDocsTree(): Promise<DocNode[]> {
-  const patterns = FILE_TYPES.map(ext => `**/*.${ext}`);
-  const entries = await fg(patterns, { cwd: DOCS_PATH, onlyFiles: true });
-
   const tree: Record<string, DocNodeInternal> = {};
   const fileExtensionRegex = new RegExp(`\\.(${FILE_TYPES.join('|')})$`);
+
+  // Local File System
+  const entries = await listLocalFiles();
+
+  // Supabase Storage
+  // const entries = await getCachedStorageFiles();
 
   for (const entry of entries) {
     const parts = entry.split('/');

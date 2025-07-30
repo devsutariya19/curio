@@ -51,7 +51,7 @@ export default function Docs() {
 
           <div className="mt-10 grid w-full grid-cols-1 gap-8 md:max-w-lg lg:max-w-none lg:grid-cols-3">
             {mainSections.map((section) => (
-              <Link href={section.href} key={section.title} className="group">
+              <Link href={'/docs'} key={section.title} className="group">
                 <Card className="h-full bg-gray-800/60 border-gray-700 rounded-xl shadow-lg hover:border-emerald-500/50 transition-all duration-300 transform hover:-translate-y-1">
                   <CardHeader className="flex flex-col items-center text-center p-6">
                     <div className="mb-4">{section.icon}</div>

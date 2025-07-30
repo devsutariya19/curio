@@ -1,14 +1,15 @@
-import { DOCS_PATH, http } from "@/lib/constants";
+import { DOCS_FILE_PATH, http } from "@/lib/constants";
 import { readDocFile } from "@/lib/server-utils";
+import { NextRequest } from "next/server";
 import path from "path";
 
 export async function GET(
-  request: Request,
-  context: { params: { slug: string[] } }
+  request: NextRequest,
+  context: { params: Promise<{ slug: string[] }> }
 ) {
   const { slug = [] } = await context.params;
 
-  const filePath = path.join(DOCS_PATH, ...slug);
+  const filePath = path.join(DOCS_FILE_PATH, ...slug);
   const fileContent = await readDocFile(filePath);
 
   if (fileContent === null) {
