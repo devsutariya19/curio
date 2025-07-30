@@ -1,5 +1,6 @@
 import {
   SidebarGroup,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -9,14 +10,11 @@ import { Bookmark } from "lucide-react"
 import { DocNode } from "@/models/types";
 import { formatTitle, flattenSlug } from "@/lib/utils";
 import Link from "next/link";
-import { headers } from "next/headers";
 
 export function SidebarFolder({ node }: { node: any }) {
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton tooltip={node.name}>
-        <span className="text-md font-bold">{formatTitle(node.name)}</span>
-      </SidebarMenuButton>
+      <SidebarGroupLabel className="text-sm">{formatTitle(node.name)}</SidebarGroupLabel>
       <SidebarMenuSub>
         {renderSidebarTree(node.children)}
       </SidebarMenuSub>
