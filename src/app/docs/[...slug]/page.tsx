@@ -4,7 +4,9 @@ import matter from 'gray-matter';
 
 import { notFound } from 'next/navigation'
 import { bundleMDX } from "mdx-bundler";
-import {getMDXComponent} from 'mdx-bundler/client'
+import { getMDXComponent } from 'mdx-bundler/client'
+import rehypePrettyCode from 'rehype-pretty-code';
+
 
 import { DOCS_FILE_PATH, DOCS_FOLDER } from '@/lib/constants'
 import { readDocFile, readStorageFile } from '@/lib/server-utils'
@@ -30,9 +32,27 @@ export default async function DocPage({ params }: { params: Promise<{ slug?: str
   }
 
   const { content, data } = matter(source)
-  const {code, frontmatter} = await bundleMDX({
-    source: content,
-  })
+  const { code, frontmatter } = await bundleMDX({
+    source: source,
+    mdxOptions(options) {
+      options.rehypePlugins = [
+        ...(options.rehypePlugins ?? []),
+        [rehypePrettyCode, { 
+          theme: 'github-dark-dimmed',
+          keepBackground: false,
+          onVisitTitle(element: any) {
+            const parent = element.parent;
+            if (parent && parent.properties) {
+              const titleText = element.children[0].value;
+              parent.properties['data-title'] = titleText;
+            }
+          },
+        }],
+      ];
+      
+      return options;
+    },
+  });
   const MdxComponent = getMDXComponent(code)
 
   return (

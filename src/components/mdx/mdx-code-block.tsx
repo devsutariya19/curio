@@ -1,15 +1,16 @@
 'use client';
 
 import React from 'react';
-import { Copy } from 'lucide-react';
+import { Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-interface PreProps {
+interface PreProps{
   children: React.ReactNode;
+  'data-title'?: string;
   [key: string]: any;
 }
 
-interface CodeProps {
+interface CodeProps{
   className?: string;
   children: React.ReactNode;
   [key: string]: any;
@@ -17,65 +18,79 @@ interface CodeProps {
 
 export function MdxPre({ children, ...props }: PreProps) {
   const [copied, setCopied] = React.useState(false);
-  
+  const preRef = React.useRef<HTMLPreElement>(null);
+
   const codeElement = React.Children.toArray(children)[0] as React.ReactElement<any>;
-  const isCodeBlock = codeElement?.props?.className?.startsWith('language-');
-  
-  // if (!isCodeBlock) {
-  //   return (
-  //     <pre className="bg-gray-800 text-white p-4 my-2 rounded-2xl overflow-x-auto" {...props}>{children}</pre>
-  //   )
-  // }
-  
-  // const code = codeElement.props.children as string;
-  // const language = (codeElement.props.className as string).replace('language-', '');
-  
+
+  const isCodeBlock =
+    codeElement?.props?.hasOwnProperty('data-language') ||
+    codeElement?.props?.className?.startsWith('language-');
+
   const copy = () => {
-    const textToCopy = isCodeBlock ? codeElement.props.children : children;
-    navigator.clipboard.writeText(textToCopy as string);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (preRef.current) {
+      navigator.clipboard.writeText(preRef.current.innerText).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }).catch(err => {
+        console.error("Failed to copy text: ", err);
+      });
+    }
   };
 
-  return (
-    <div className="bg-gray-800 rounded-lg overflow-auto my-4">
-      {isCodeBlock && (
-        <div className="flex justify-between items-center px-4 py-2 bg-gray-700">
-          <span className="text-gray-200 text-sm">
-            {(codeElement.props.className as string).replace('language-', '')}
-          </span>
-          <Button variant="ghost" size="icon" onClick={copy} className="p-1 bg-none">
-            <Copy />
+  if (!isCodeBlock) {
+    return (
+      <div className="bg-gray-800 rounded-lg my-4 flex flex-row justify-between items-center">
+        <pre ref={preRef} className="p-4 overflow-x-auto w-full whitespace-pre-wrap" {...props}>
+          {children}
+        </pre>
+        <div className="flex items-center gap-x-3 px-4 py-2">
+          {copied && <span className="text-xs">Copied!</span>}
+          <Button variant="ghost" onClick={copy} className="p-1 text-gray-300 hover:text-white" aria-label="Copy code">
+            {copied ? <Check size={16} /> : <Copy size={16} />}
           </Button>
         </div>
-      )}
-      
-      <div className='flex flex-row justify-between items-center'>
-        <pre className="p-4 overflow-x-auto whitespace-pre-wrap">
-          {isCodeBlock ? (
-            <code className="text-emerald-400 text-sm">{codeElement.props.children}</code>
-          ) : (
-            children
-          )}
-        </pre>
-        
-        {!isCodeBlock && (
-          <div className="px-4 py-2">
-            <Button variant="ghost" size="icon" onClick={copy} className="p-1 bg-none hover:bg-gray-700!">
-              <Copy />
-            </Button>
-          </div>
-        )}
+      </div>
+    );
+  }
+
+  let language = 'text';
+  if (codeElement.props['data-language']) {
+    language = codeElement.props['data-language'];
+  } else if (codeElement.props.className?.startsWith('language-')) {
+    language = codeElement.props.className.replace('language-', '');
+  }
+
+  const title = props['data-title'];
+
+  return (
+    <div className="bg-gray-800 rounded-lg overflow-hidden my-4">
+      <div className="flex justify-between items-center px-4 py-2 bg-gray-700">
+        <span className="text-gray-200 text-sm font-mono">{title || language}</span>
+        <div className="flex items-center gap-x-3">
+          {copied && <span className="text-xs text-emerald-400">Copied!</span>}
+          <Button variant="ghost" onClick={copy} className="p-1 text-gray-300 hover:text-white" aria-label="Copy code">
+            {copied ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
+          </Button>
+        </div>
       </div>
       
-      {copied && <div className="text-emerald-400 text-xs px-2 py-1">Copied!</div>}
+      <pre ref={preRef} className="p-4 text-sm overflow-x-auto whitespace-pre-wrap" {...props}>
+        {children}
+      </pre>
     </div>
   );
 }
 
 export function MdxCode({ className, children, ...props }: CodeProps) {
-  if (className?.startsWith('language-')) {
+  const isBlock = props.hasOwnProperty('data-language') || className?.startsWith('language-');
+  
+  if (isBlock) {
     return <code className={className} {...props}>{children}</code>;
   }
-  return <code className="bg-gray-800 text-emerald-400 text-sm px-1 py-0.5 rounded" {...props}>{children}</code>;
+
+  return (
+    <code className="bg-gray-800 text-emerald-400 text-sm px-1 py-0.5 rounded" {...props}>
+      {children}
+    </code>
+  );
 }

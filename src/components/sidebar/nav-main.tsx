@@ -1,3 +1,5 @@
+'use client'
+
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -10,6 +12,7 @@ import { Bookmark } from "lucide-react"
 import { DocNode } from "@/models/types";
 import { formatTitle, flattenSlug } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function SidebarFolder({ node }: { node: any }) {
   return (
@@ -26,13 +29,16 @@ export function renderSidebarTree(nodes: DocNode[]) {
   const folders = nodes.filter((node) => node.children && node.children.length > 0)
   const files = nodes.filter((node) => !node.children)
 
+  const pathName = usePathname();
+  const lastSegment = pathName.split('/').filter(Boolean).pop() || '';
+
   return (
     <SidebarMenu>
       {files.map((node) => {
         const slugStr = flattenSlug(node.slug)
         return (
           <SidebarMenuItem key={slugStr}>
-            <SidebarMenuButton asChild tooltip={formatTitle(node.name)}>
+            <SidebarMenuButton asChild tooltip={formatTitle(node.name)} isActive={lastSegment === node.name}>
               <Link href={slugStr} className="flex items-center gap-2 w-full">
                 <Bookmark className="shrink-0" />
                 <span>{formatTitle(node.name)}</span>
@@ -49,7 +55,7 @@ export function renderSidebarTree(nodes: DocNode[]) {
   )
 }
 
-export async function NavMain({docsTree}: {docsTree: any[]}) {
+export function NavMain({docsTree}: {docsTree: any[]}) {
   return (
     <SidebarGroup>
       {renderSidebarTree(docsTree)}

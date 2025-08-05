@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import path from 'path'
 import fs from 'fs'
-import { DOCS_FILE_PATH, http } from '@/lib/constants'
-import { context } from 'esbuild';
+import { ASSETS_FOLDER, DOCS_FILE_PATH, http } from '@/lib/constants'
 
 export async function GET(
   request: NextRequest, 
@@ -10,7 +9,7 @@ export async function GET(
 ) {
   const params = await context.params;
   const requestedPath = params.path.join('/');
-  const filePath = path.join(DOCS_FILE_PATH, 'images', requestedPath)
+  const filePath = path.join(DOCS_FILE_PATH, ASSETS_FOLDER, requestedPath)
 
   if (!fs.existsSync(filePath)) {
     return NextResponse.json({ error: 'File not found' }, { status: http.NOT_FOUND })

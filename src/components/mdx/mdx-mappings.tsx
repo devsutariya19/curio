@@ -8,6 +8,7 @@ import { MdxInfo } from "@/components/mdx/mdx-info";
 import { MdxNote } from "@/components/mdx/mdx-note";
 import { MdxSteps, MdxStep } from "@/components/mdx/mdx-steps";
 import { MdxWarning } from "@/components/mdx/mdx-warning";
+import { MdxCodeGroup } from "@/components/mdx/mdx-code-group";
 
 // MDX components mapping
 export const MDX_COMPONENTS = {
@@ -19,10 +20,11 @@ export const MDX_COMPONENTS = {
   ul: (props: any) => <ul className="list-disc pl-6 space-y-2" {...props}/>,
   ol: (props: any) => <ol className="list-decimal pl-6 space-y-2" {...props}/>,
   blockquote: (props: any) => <blockquote className="border-l-4 pl-4 italic text-gray-600" {...props} />,
+  Link: (props: any) => <a className="text-blue-500" {...props} />,
   code: MdxCode,
   pre: MdxPre,
-  CodeGroup: MdxCode,
-  Link: (props: any) => <a className="text-blue-500" {...props} />,
+  CodeGroup: MdxCodeGroup,
+  CodeBlocks: MdxCodeGroup,
   Card: MdxCard,
   CardGroup: MdxColumns,
   Columns: MdxColumns,
