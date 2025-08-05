@@ -1,7 +1,6 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { Leaf, Star, Book } from "lucide-react";
-import { DOCS_FILE_PATH, DOCS_FOLDER } from "@/lib/constants";
 
 const iconMap = {
   leaf: <Leaf className="w-5 h-5 text-green-500" />,
@@ -21,15 +20,24 @@ export function MdxCard({ title, icon, href, children }: Props) {
   const normalizedHref = href ? href.replace(/^\/+/, '') : '';
   const fullHref = `/docs/${normalizedHref}`;
 
+  const isExternal = href && (
+    /^https?:\/\//.test(href) || /^www\./.test(href)
+  );
+
   const CardInner = (
     <Card className="transition-shadow hover:shadow-md my-5 bg-gray-800">
       <CardHeader className="flex items-center gap-3">
         {Icon}
         <div>
           <CardTitle className="text-lg">{title}</CardTitle>
-          {fullHref && (
+
+          {href && (
             <CardDescription className="text-xs text-muted-foreground break-all">
-              {fullHref}
+              {isExternal ? (
+                <>{href}</>
+              ) : (
+                fullHref
+              )}
             </CardDescription>
           )}
         </div>
@@ -38,8 +46,16 @@ export function MdxCard({ title, icon, href, children }: Props) {
     </Card>
   );
 
+  if (isExternal) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        {CardInner}
+      </a>
+    );
+  }
+
   return fullHref ? (
-    <Link href={fullHref} target="_blank" rel="noopener noreferrer">
+    <Link href={fullHref}>
       {CardInner}
     </Link>
   ) : (
