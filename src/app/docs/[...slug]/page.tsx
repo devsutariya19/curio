@@ -9,11 +9,9 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import { DOCS_FILE_PATH, DOCS_FOLDER, OPENAPI_FILE_TYPES } from '@/lib/constants'
 import { listLocalFiles, readDocFile, readOpenApiSpec, readStorageFile } from '@/lib/server-utils'
 
-import { Button } from '@/components/ui/button'
-import { ChevronDown } from 'lucide-react'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { MDX_COMPONENTS } from '@/components/mdx/mdx-mappings';
 import { Badge } from '@/components/ui/badge';
+import { ApiSpec } from '@/components/api-spec';
 
 export default async function DocPage({ params }: { params: Promise<{ slug?: string[] }> }) {
   const { slug = [] } = await params
@@ -56,7 +54,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug?: str
   let openapi_spec = null
   if (frontmatter.openapi) {
     openapi_spec = await readOpenApiSpec(frontmatter, slug);
-    console.log('OpenAPI Spec:', openapi_spec);
+    // console.log('OpenAPI Spec:', openapi_spec);
   }
   
   return (
@@ -88,8 +86,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug?: str
       </div>
 
       {openapi_spec ? (
-        <>
-        </>
+        <ApiSpec spec={openapi_spec} />
       ) : (
         <MdxComponent components={MDX_COMPONENTS}/>
       )}
