@@ -15,7 +15,9 @@ export function MdxColumns({ children, cols = 2, className }: ColumnsProps) {
   }[cols];
 
   return (
-    <div className={cn("grid grid-cols-1 gap-6 my-8", gridCols, className)}>
+    <div
+      className={cn("grid grid-cols-1 gap-3", gridCols, "auto-rows-auto", className)}
+    >
       {children}
     </div>
   );

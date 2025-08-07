@@ -25,12 +25,11 @@ export function MdxCard({ title, icon, href, children }: Props) {
   );
 
   const CardInner = (
-    <Card className="transition-shadow hover:shadow-md my-5 bg-gray-800">
+    <Card className="transition-shadow hover:shadow-md bg-gray-800 flex flex-col h-full">
       <CardHeader className="flex items-center gap-3">
         {Icon}
         <div>
           <CardTitle className="text-lg">{title}</CardTitle>
-
           {href && (
             <CardDescription className="text-xs text-muted-foreground break-all">
               {isExternal ? (
@@ -42,7 +41,7 @@ export function MdxCard({ title, icon, href, children }: Props) {
           )}
         </div>
       </CardHeader>
-      <CardContent className="text-sm text-muted-foreground">{children}</CardContent>
+      <CardContent className="text-sm text-muted-foreground flex-grow">{children}</CardContent>
     </Card>
   );
 
@@ -62,3 +61,4 @@ export function MdxCard({ title, icon, href, children }: Props) {
     CardInner
   );
 }
+

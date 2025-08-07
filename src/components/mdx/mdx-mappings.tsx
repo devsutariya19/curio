@@ -16,7 +16,7 @@ export const MDX_COMPONENTS = {
   h2: (props: any) => <h2 className="text-3xl font-semibold mt-6 mb-3" {...props} />,
   h3: (props: any) => <h3 className="text-2xl font-semibold mt-4 mb-2" {...props} />,
   hr: (props: any) => <hr className="border-t-2 border-gray-300 my-6" {...props} />,
-  p: (props: any) => <p className="mt-4 leading-relaxed" {...props} />,
+  p: (props: any) => <p className="mb-4 leading-relaxed" {...props} />,
   ul: (props: any) => <ul className="list-disc pl-6 space-y-2" {...props}/>,
   ol: (props: any) => <ol className="list-decimal pl-6 space-y-2" {...props}/>,
   blockquote: (props: any) => <blockquote className="border-l-4 pl-4 italic text-gray-600" {...props} />,

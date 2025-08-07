@@ -19,7 +19,7 @@ Create a simple, fast, and functional documentation site that allows users to vi
 #### **1.2 Markdown Rendering** (MDX)
 - **Objective**: Render markdown content with the ability to embed React components (MDX).
 - **Tasks**:
-  - Install and configure `@next/mdx` for markdown and MDX support.
+  - Install and configure `mdx-bundler` for markdown and MDX support.
   - Render markdown content and display it as HTML.
   - Implement a basic `table of contents` based on headers.
 

@@ -6,12 +6,12 @@ import { redirect } from 'next/navigation'
 import { ReactNode } from 'react'
 
 export default async function DocLayout({ children }: { children: ReactNode }) {
-  const supabase = await createClient();
-  const {data, error} = await supabase.auth.getUser();
-  const isAuthenticated = data.user !== null;
-  if (error || !isAuthenticated) {
-    redirect('/login');
-  }
+  // const supabase = await createClient();
+  // const {data, error} = await supabase.auth.getUser();
+  // const isAuthenticated = data.user !== null;
+  // if (error || !isAuthenticated) {
+  //   redirect('/login');
+  // }
 
   return (
     <SidebarProvider>
@@ -19,7 +19,7 @@ export default async function DocLayout({ children }: { children: ReactNode }) {
       <SidebarInset>
         <div className="bg-gray-900 overscroll-none">
           <main>
-            <Navbar className='lg:hidden fixed top-0 w-full z-50' isAuthenticated={isAuthenticated}/>
+            <Navbar className='lg:hidden fixed top-0 w-full z-50'/>
             <div className="px-8 lg:px-12 lg:my-5 my-25 z-10 max-w-screen-2xl mx-auto">
               {children}
             </div>

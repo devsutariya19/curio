@@ -1,14 +1,32 @@
-# Markdown Rendering (MDX)
+---
+title: 'Markdown rendering (MDX)'
+description: 'Render markdown content with the ability to embed React components (MDX)'
+icon: 'markdown'
+---
 
-## Objective
-Render markdown content with the ability to embed React components (MDX).
+# Markdown Rendering Components
+This documentation outlines the available components you can use in your markdown files to enhance the presentation of content. These components are integrated into the MDX rendering pipeline and styled accordingly for a smooth and clean user experience.
 
-## Implementation
-- **Libraries**: `@next/mdx`, `remark`, `rehype`
-- **Details**: We will use `@next/mdx` to handle the transformation of MDX into HTML. `remark` and `rehype` plugins will be used to process the markdown, enabling features like syntax highlighting and a table of contents.
+## Available Components
 
-### Tasks
-- [x] Install and configure `@next/mdx`.
-- [x] Create a generic layout component for markdown pages.
-- [x] Implement a Table of Contents component that generates links from `h1`, `h2`, and `h3` tags.
-- [ ] Add custom React components to be used within MDX files.
+### Callouts
+- `<Note>` for helpful supplementary information
+- `<Warning>` for important cautions and breaking changes
+- `<Tip>` for best practices and expert advice  
+- `<Info>` for neutral contextual information
+
+### Code examples
+- When appropriate, include complete, runnable examples
+- Use `<CodeGroup>` for multiple language examples
+- Specify language tags on all code blocks
+- Include realistic data, not placeholders
+
+### Procedures
+- Use `<Steps>` component for sequential instructions
+- Break complex procedures into smaller steps
+
+### Content organization
+- Use `<Tabs>` for platform-specific content
+- Use `<Accordion>` for progressive disclosure
+- Use `<Card>` and `<CardGroup>` for highlighting content
+- Wrap images in `<Frame>` components with descriptive alt text

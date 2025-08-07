@@ -1,20 +1,19 @@
 import path from 'path'
 import ResponsiveBreadcrumbs from '@/components/responsive-breadcrumbs'
-import matter from 'gray-matter';
 
 import { notFound } from 'next/navigation'
 import { bundleMDX } from "mdx-bundler";
 import { getMDXComponent } from 'mdx-bundler/client'
 import rehypePrettyCode from 'rehype-pretty-code';
 
-
-import { DOCS_FILE_PATH, DOCS_FOLDER } from '@/lib/constants'
-import { readDocFile, readStorageFile } from '@/lib/server-utils'
+import { DOCS_FILE_PATH, DOCS_FOLDER, OPENAPI_FILE_TYPES } from '@/lib/constants'
+import { listLocalFiles, readDocFile, readOpenApiSpec, readStorageFile } from '@/lib/server-utils'
 
 import { Button } from '@/components/ui/button'
 import { ChevronDown } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { MDX_COMPONENTS } from '@/components/mdx/mdx-mappings';
+import { Badge } from '@/components/ui/badge';
 
 export default async function DocPage({ params }: { params: Promise<{ slug?: string[] }> }) {
   const { slug = [] } = await params
@@ -31,7 +30,6 @@ export default async function DocPage({ params }: { params: Promise<{ slug?: str
     return notFound()
   }
 
-  const { content, data } = matter(source)
   const { code, frontmatter } = await bundleMDX({
     source: source,
     mdxOptions(options) {
@@ -55,35 +53,46 @@ export default async function DocPage({ params }: { params: Promise<{ slug?: str
   });
   const MdxComponent = getMDXComponent(code)
 
+  let openapi_spec = null
+  if (frontmatter.openapi) {
+    openapi_spec = await readOpenApiSpec(frontmatter, slug);
+    console.log('OpenAPI Spec:', openapi_spec);
+  }
+  
   return (
     <div className="mx-auto max-w-screen-sm sm:max-w-full mb-20">
       <div className='flex items-center justify-between mb-4'>
         <ResponsiveBreadcrumbs slug={slug} />
-        {/* <div className="flex items-center">
-          <Button className="rounded-r-none">
-            Copy Page
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button className="rounded-l-none border-l-0 px-2">
-                <ChevronDown />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem>View as Markdown</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div> */}
       </div>
-      <div className="mb-10">
-        {data.title && (
+      
+      <div className='mb-10'>
         <h1 className="text-4xl font-bold text-white border-b border-gray-700 pb-2">
-          {data.title}
+          {openapi_spec?.summary || frontmatter.title || ''}
         </h1>
-        )}
-        {data.description && <p className="mt-2 text-md text-gray-400">{data.description}</p>}
+        <div className="flex flex-row gap-2 items-center mt-2 text-md text-gray-400">
+          {openapi_spec?.method && (
+            <Badge className='bg-emerald-900 text-emerald-400'>{openapi_spec.method}</Badge>
+          )}
+
+          {openapi_spec?.url ? (
+            <p>
+              <span className='text-gray-300'>{openapi_spec?.url}</span>
+              <span className='text-gray-500'>{openapi_spec?.path}</span>
+            </p>
+          ) : (
+            <>
+              {frontmatter.description || ''}
+            </>
+          )}
+        </div>
       </div>
-      <MdxComponent components={MDX_COMPONENTS}/>
+
+      {openapi_spec ? (
+        <>
+        </>
+      ) : (
+        <MdxComponent components={MDX_COMPONENTS}/>
+      )}
     </div>
   )
 }

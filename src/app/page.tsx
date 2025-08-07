@@ -7,12 +7,12 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const supabase = await createClient();
-  const {data, error} = await supabase.auth.getUser();
-  const isAuthenticated = data.user !== null;
-  if (error || !isAuthenticated) {
-    redirect('/login');
-  }
+  // const supabase = await createClient();
+  // const {data, error} = await supabase.auth.getUser();
+  // const isAuthenticated = data.user !== null;
+  // if (error || !isAuthenticated) {
+  //   redirect('/login');
+  // }
 
   const features = [
     {
@@ -43,7 +43,7 @@ export default async function Home() {
   
   return (
     <div className="bg-gray-900 text-gray-100 min-h-screen overflow-x-hidden">
-      <Navbar className="fixed top-0 left-0 right-0" isAuthenticated={isAuthenticated}/>
+      <Navbar className="fixed top-0 left-0 right-0"/>
 
       <main className="pt-32 relative z-10">
         <div className="container mx-auto sm:px-2 px-6">

@@ -1,5 +1,5 @@
 import { DocNode } from '@/models/types';
-import { FILE_TYPES } from '@/lib/constants';
+import { DOCS_FILE_PATH, MD_FILE_TYPES } from '@/lib/constants';
 import { listLocalFiles, listStorageFiles } from '@/lib/server-utils';
 
 import { getCachedStorageFiles } from '@/lib/file-cache';
@@ -8,15 +8,15 @@ type DocNodeInternal = Omit<DocNode, 'children'> & { children?: Record<string, D
 
 export async function getDocsTree(): Promise<DocNode[]> {
   const tree: Record<string, DocNodeInternal> = {};
-  const fileExtensionRegex = new RegExp(`\\.(${FILE_TYPES.join('|')})$`);
+  const fileExtensionRegex = new RegExp(`\\.(${MD_FILE_TYPES.join('|')})$`);
 
   // Local File System
-  const entries = await listLocalFiles();
+  const doc_entries = await listLocalFiles(DOCS_FILE_PATH, MD_FILE_TYPES);
 
   // Supabase Storage
   // const entries = await getCachedStorageFiles();
 
-  for (const entry of entries) {
+  for (const entry of doc_entries) {
     const parts = entry.split('/');
     let current = tree;
     for (let i = 0; i < parts.length; i++) {
