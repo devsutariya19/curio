@@ -14,8 +14,8 @@ export function ApiSpec({ spec }: {spec: any}) {
     const firstExampleKey = Object.keys(requestBodyExamples)[0];
     const sampleBody = JSON.stringify(requestBodyExamples[firstExampleKey].value, null, 2);
     curlRequest = `curl -X ${spec.method} ${fullUrl} \\
-      -H "Content-Type: application/json" \\
-      -d '${sampleBody}'`;
+    -H "Content-Type: application/json" \\
+    -d '${sampleBody}'`;
   } else {
     const queryParams = spec.parameters?.filter((p: any) => p.in === 'query').map((p: any) => `${p.name}=...`).join('&') || '';
     curlRequest = `curl -X ${spec.method} "${fullUrl}${queryParams ? `?${queryParams}`: ''}"`;
@@ -74,8 +74,8 @@ export function ApiSpec({ spec }: {spec: any}) {
         
         <div className="space-y-4">
           <Card className="bg-[#1C1C1C] border-gray-800 overflow-hidden">
-            <CardHeader className="flex-row items-center justify-between !py-2 !px-4 border-b border-gray-800">
-              <div className="flex items-center gap-3">
+            <CardHeader className="flex-row items-center justify-between py-2 px-4 border-b border-gray-800">
+              <div className="flex items-center gap-2">
                 <span className={cn("font-mono text-xs font-bold", methodClass)}>{spec.method}</span>
                 <span className="text-gray-400 text-xs font-mono">{spec.path}</span>
               </div>
@@ -99,7 +99,7 @@ export function ApiSpec({ spec }: {spec: any}) {
 
             return (
               <Card key={code} className="bg-[#1C1C1C] border-gray-800 overflow-hidden">
-                <CardHeader className="flex-row items-center justify-between !py-2 !px-4 border-b border-gray-800">
+                <CardHeader className="flex-row items-center justify-between py-2 px-4 border-b border-gray-800">
                   <div className="flex items-center gap-3">
                     <Badge className={code.startsWith('2') ? "text-green-300 bg-green-900/50 border-green-700" : "text-red-300 bg-red-900/50 border-red-700"}>{code}</Badge>
                     <span className="text-gray-400 text-xs">{response.description}</span>

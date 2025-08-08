@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Home } from "lucide-react";
 import Link from "next/link";
 
 export default function NotFound() {
@@ -22,15 +22,20 @@ export default function NotFound() {
           Sorry, we couldn't find the page you're looking for. It might have been moved or deleted.
         </p>
 
-        <Button 
-          asChild 
-          className="mt-8 bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-500/20"
-        >
-          <Link href="/">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Go Back Home
-          </Link>
-        </Button>
+        <div className="flex flex-row gap-5 items-center">
+          <Button asChild className="mt-8 bg-gray-600 text-white hover:bg-gray-700 shadow-lg shadow-gray-500/20">
+            <Link href="/">
+              <Home className="mr-2 h-4 w-4" />
+              Go Back Home
+            </Link>
+          </Button>
+          <Button asChild className="mt-8 bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-500/20">
+            <Link href="/docs">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Go to Docs
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   );

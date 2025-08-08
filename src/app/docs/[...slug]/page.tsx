@@ -6,8 +6,8 @@ import { bundleMDX } from "mdx-bundler";
 import { getMDXComponent } from 'mdx-bundler/client'
 import rehypePrettyCode from 'rehype-pretty-code';
 
-import { DOCS_FILE_PATH, DOCS_FOLDER, OPENAPI_FILE_TYPES } from '@/lib/constants'
-import { listLocalFiles, readDocFile, readOpenApiSpec, readStorageFile } from '@/lib/server-utils'
+import { DOCS_FILE_PATH } from '@/lib/constants'
+import { readDocFile, readOpenApiSpec, readStorageFile } from '@/lib/server-utils'
 
 import { MDX_COMPONENTS } from '@/components/mdx/mdx-mappings';
 import { Badge } from '@/components/ui/badge';

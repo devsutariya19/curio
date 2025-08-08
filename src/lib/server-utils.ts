@@ -23,6 +23,11 @@ export async function listLocalFiles(filePath: string, fileType: string[]) {
  * @returns The content of the document file or null if not found.
  */
 export async function readDocFile(basePath: string): Promise<string | null> {
+  if (shouldIgnoreFile(basePath)) {
+    console.warn(`Ignoring file due to prefix: ${basePath}`);
+    return null;
+  }
+
   for (const ext of MD_FILE_TYPES) {
     const fullPath = `${basePath}.${ext}`;
     
@@ -35,7 +40,7 @@ export async function readDocFile(basePath: string): Promise<string | null> {
       }
     }
   }
-  
+
   console.warn(`No file found for base path: ${basePath}`);
   return null;
 }
@@ -63,6 +68,14 @@ export async function readOpenApiSpec(frontmatter: any, slug: string[]) {
   }
 
   return spec;
+}
+
+/**
+ * Check if the file or any part of its path starts with the ignore prefix
+ */
+function shouldIgnoreFile(filePath: string): boolean {
+  const parts = filePath.split(path.sep);
+  return parts.some(part => part.startsWith(FILE_IGNORE_PREFIX));
 }
 
 export async function listStorageFiles(rootFolder: string, currentPrefix = rootFolder): Promise<string[]> {

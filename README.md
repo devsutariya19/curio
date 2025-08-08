@@ -1,17 +1,8 @@
-# Curio Docs 
-![Work In Progress](https://img.shields.io/badge/Status-In%20Progress-yellow)
+# Curio Docs
 
 A fast, modern, and collaborative documentation site powered by Next.js and Supabase.
 
 This project provides a complete solution for building a documentation website with built-in content management, real-time collaboration, and powerful AI-driven search. It's designed to be easy for non-technical users to contribute while offering advanced features for developers.
-
-## Project Status
-This project is currently under development. I am working on several features and updates, and the main functionality is about 50% complete.
-
-### In Development
-- [ ] Full Supabase Integration: Connecting authentication, database storage for documents, and user roles to the frontend.
-- [ ] GitHub Integration: Connect GitHub repository to keep documentation in sync
-- [ ] AI Semantic Search: Implementing an advanced search that understands natural language queries.
 
 ---
 
@@ -22,8 +13,6 @@ This project is currently under development. I am working on several features an
 * **Responsive Layout**: A clean, modern, and mobile-first UI built with Tailwind CSS.
 * **GitHub Integration**: *(Planned)* Keep your documentation in sync by managing it directly within your GitHub repository.
 * **Supabase Auth**: *(Planned)* Secure user authentication with role-based access control (Admin, Contributor, Viewer).
-* **Real-Time Collaboration**: *(Planned)* Allow multiple users to edit the same document simultaneously.
-* **AI Semantic Search**: *(Planned)* Go beyond keywords with an AI-powered search that understands the meaning behind user queries.
 
 ## 🚀 Tech Stack
 
