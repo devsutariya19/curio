@@ -29,7 +29,7 @@ This project provides a complete solution for building a documentation website w
 The file structure inside the docs folder dictates the routing of the app. Here's how the routing is mapped:
 - `docs/introduction.md` → /introduction
 - `docs/setup.md` → /setup
-- `docs/api/index.md` → /api
+- `docs/api/store.md` → /api/
 - `docs/api/user.md` → /api/user
 - `docs/getting-started.md` → /getting-started
 
