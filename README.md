@@ -1,24 +1,51 @@
 # Curio Docs
 
-A fast, modern, and collaborative documentation site powered by Next.js and Supabase.
+A fast, modern, and collaborative documentation site powered by Next.js.
 
-This project provides a complete solution for building a documentation website with built-in content management, real-time collaboration, and powerful AI-driven search. It's designed to be easy for non-technical users to contribute while offering advanced features for developers.
+This project provides a complete solution for building a documentation website with built-in content management. It's designed to be easy for non-technical users to contribute while offering advanced features for developers.
 
 ---
 
-## ✨ Features
+## Features
+- **File-Based Routing**: Routes are automatically generated based on the folder structure in the docs directory.
+- **MDX Bundler Integration**: Allows you to write documentation using markdown and embed React components seamlessly.
+- **OpenAPI Spec Generation**: If a folder contains a .yaml file, an OpenAPI spec will be auto-generated and made available at the corresponding route.
 
-* **Folder-Based Routing**: Automatically create pages and sections by adding `.mdx` files to the `docs` folder.
-* **MDX Support**: Embed interactive React components directly within your Markdown content.
-* **Responsive Layout**: A clean, modern, and mobile-first UI built with Tailwind CSS.
-* **GitHub Integration**: *(Planned)* Keep your documentation in sync by managing it directly within your GitHub repository.
-* **Supabase Auth**: *(Planned)* Secure user authentication with role-based access control (Admin, Contributor, Viewer).
+### Folder structure
+``` Files
+/docs
+  ├── introduction.md         # Main documentation file for the intro page
+  ├── setup.md                # Setup guide
+  ├── api
+  │   ├── get-api.md          # Overview of the API
+  │   ├── put-api.md          # User-related API documentation
+  │   ├── openapi.yaml        # OpenAPI specification for the API
+  ├── getting-started.md      # Getting Started guide
+  ├── advanced.md             # Advanced topics
+  ├── troubleshooting.md      # Troubleshooting guide
+```
+
+## Routing
+The file structure inside the docs folder dictates the routing of the app. Here's how the routing is mapped:
+- `docs/introduction.md` → /introduction
+- `docs/setup.md` → /setup
+- `docs/api/index.md` → /api
+- `docs/api/user.md` → /api/user
+- `docs/getting-started.md` → /getting-started
+
+### Dynamic Routes
+If you add subfolders or markdown files within any folder, those will be reflected in the sidebar and linked accordingly. For example:
+- `docs/api/auth.md` → /api/auth
+
+### OpenAPI Spec
+If there's a .yaml file (e.g., openapi.yaml) within any folder, an OpenAPI spec will automatically be generated at that route. For example:
+- `docs/api/openapi.yaml` → /api/openapi
 
 ## 🚀 Tech Stack
 
--   **Framework**: Next.js
--   **Backend & Database**: Supabase
--   **Styling**: Tailwind CSS
+-   **Frontend**: Next.js
+-   **Backend**: Supabase
+-   **Styling**: Tailwind CSS, Shadcn
 -   **Content**: MDX
 
 ## 🛠️ Getting Started
