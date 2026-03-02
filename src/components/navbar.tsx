@@ -23,7 +23,7 @@ export default function Navbar({
             </h1>
           </Link>
           <nav className="flex items-center space-x-4">
-            {isAuthenticated ? (
+            {/* {isAuthenticated ? (
               <Link href="/docs">
                 <Button className="bg-emerald-600 text-white hover:bg-emerald-700 rounded-lg">
                   Docs <ArrowRight className="ml-2 h-4 w-4" />
@@ -35,7 +35,12 @@ export default function Navbar({
                   Sign In
                 </Button>
               </Link>
-            }
+            } */}
+            <Link href="/docs">
+              <Button variant="ghost" className="text-gray-300 hover:text-white hover:bg-gray-800">
+                Docs
+              </Button>
+            </Link>
           </nav>
         </div>
         <div className="h-[1px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>

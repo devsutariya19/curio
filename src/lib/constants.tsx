@@ -1,7 +1,6 @@
 import path from "path";
 
 export const DOCS_FILE_PATH = path.join(process.cwd(), 'docs');
-// export const DOCS_FILE_PATH = '/Users/dev/Documents/Projects/fern/docs-starter/fern/docs';
 export const MD_FILE_TYPES: string[] = ['mdx', 'md'];
 export const OPENAPI_FILE_TYPES: string[] = ['yaml', 'yml', 'json'];
 export const FILE_IGNORE_PREFIX = '_';

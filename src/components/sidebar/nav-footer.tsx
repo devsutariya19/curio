@@ -13,7 +13,7 @@ export function NavFooter() {
       <SidebarMenu>
         <SidebarMenuItem>
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+            {/* <DropdownMenuTrigger asChild> */}
               <SidebarMenuButton
                 size="lg"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
@@ -26,15 +26,15 @@ export function NavFooter() {
                   <span className="truncate font-medium">cruio</span>
                   <span className="truncate text-xs">curio@example.com</span>
                 </div>
-                <ChevronUp className="ml-auto size-4" />
+                {/* <ChevronUp className="ml-auto size-4" /> */}
               </SidebarMenuButton>
-            </DropdownMenuTrigger>
+            {/* </DropdownMenuTrigger> */}
             <DropdownMenuContent             
                 className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
                 side={isMobile ? "bottom" : "right"}
                 align="end"
                 sideOffset={4}>
-              <DropdownMenuItem>
+              {/* <DropdownMenuItem>
                 <span>Account</span>
               </DropdownMenuItem>
               <DropdownMenuItem>
@@ -42,7 +42,7 @@ export function NavFooter() {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <span>Sign out</span>
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
             </DropdownMenuContent>
           </DropdownMenu>
         </SidebarMenuItem>

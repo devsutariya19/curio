@@ -18,11 +18,11 @@ info:
     
   version: 1.0.18
   title: Swagger Plant Store - OpenAPI 3.1
-  termsOfService: "http://buildwithfern.com/tos/"
+  termsOfService: "http://curiodocs/tos/"
   contact:
     name: Plant Store API Support
     url: https://support.plantstore.dev
-    email: support@buildwithfern.com
+    email: support@curiodocs.com
   license:
     name: Apache 2.0
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
@@ -58,9 +58,9 @@ paths:
               $ref: "#/components/schemas/Plant"
             examples:
               example1:
-                summary: Add a Fern Plant
+                summary: Add a Bonsai Plant
                 value:
-                  name: "Fern"
+                  name: "Bonsai"
                   category: "Indoor"
                   tags: ["green", "leafy"]
                   status: "available"
@@ -76,7 +76,7 @@ paths:
                   summary: Successful Plant Addition
                   value:
                     id: 101
-                    name: "Fern"
+                    name: "Bonsai"
                     status: "available"
                     tags: ["green", "leafy"]
         "405":
@@ -97,7 +97,7 @@ paths:
               example1:
                 summary: Update plant status
                 value:
-                  name: "Fern"
+                  name: "Bonsai"
                   category: "Indoor"
                   tags: ["green", "leafy"]
                   status: "sold"
@@ -113,7 +113,7 @@ paths:
                   summary: Successful Plant Update
                   value:
                     id: 101
-                    name: "Fern"
+                    name: "Bonsai"
                     status: "sold"
                     tags: ["green", "leafy"]
         "400":
@@ -149,7 +149,7 @@ paths:
                   summary: Plants with status available
                   value:
                     - id: 101
-                      name: "Fern"
+                      name: "Bonsai"
                       status: "available"
                       tags: ["green", "leafy"]
                     - id: 102
@@ -185,7 +185,7 @@ paths:
                   summary: Plants filtered by tags
                   value:
                     - id: 101
-                      name: "Fern"
+                      name: "Bonsai"
                       status: "available"
                       tags: ["green", "leafy"]
                     - id: 103
@@ -218,7 +218,7 @@ paths:
                   summary: Plant details
                   value:
                     id: 101
-                    name: "Fern"
+                    name: "Bonsai"
                     status: "available"
                     tags: ["green", "leafy"]
   /user/auth/login:
