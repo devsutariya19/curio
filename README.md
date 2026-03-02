@@ -4,6 +4,8 @@ A fast, modern, and collaborative documentation site powered by Next.js.
 
 This project provides a complete solution for building a documentation website with built-in content management. It's designed to be easy for non-technical users to contribute while offering advanced features for developers.
 
+### [Curio Docs](https://curio-docs.vercel.app/)
+
 ---
 
 ## Features
